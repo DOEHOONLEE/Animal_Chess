@@ -1,0 +1,117 @@
+* {
+    font-family: 'Baloo Tamma', cursive;
+    text-align: center;
+}
+
+a {
+    text-decoration: none;
+    color: black;
+}
+
+body {
+    background-color: #ffb833;
+}
+
+.header p {
+    text-align: center;
+    font-size: 60px;
+    margin-top: 10px;
+    margin-bottom: 10px;
+}
+
+.navbar li {
+    font-size: 25px;
+    list-style-type: none;
+    display: inline-block;
+    margin: 0 3%;
+    padding: 0;
+}
+
+.navbar ul {
+    margin: 0;
+    padding: 0;
+    text-align: center;
+}
+
+.navbar a:hover {
+    color: aliceblue;
+}
+
+.game_table {
+    border: 2px solid black;
+    width: 360px;
+    height: 488px;
+    margin-top: 10px;
+    margin-bottom: auto;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.login_table {
+    border: 2px solid black;
+    max-width: 360px;
+    max-height: 474px;
+    width: 360px;
+    height: 474px;
+    margin-top: 10px;
+    margin-bottom: auto;
+    margin-left: auto;
+    margin-right: auto;
+    padding-top: 15px;
+}
+
+input {
+    font-size: 14px;
+}
+
+.game_board {
+    width: 360px;
+    height: 488px;
+}
+
+.game_board td {
+    padding: 0px;
+    border: 2px solid black;
+    width: 107px;
+    height: 107px;
+}
+
+.user_input {
+    display: block;
+    margin: 0 auto;
+}
+
+.button {
+    padding-top: 10px;
+}
+
+.start_button {
+    display: block;
+    margin: 0 auto;
+    font-size: 20px;
+    border-radius: 10%;
+    background-color: #80bfff;
+}
+
+button:focus {outline:0;}
+
+.team_red, .team_blue {
+    height: 100px;
+    width: 100px;
+    display: block;
+    margin: auto;
+}
+
+.team_red {
+    border: 3px solid red;
+    border: 3px solid red;
+}
+
+.team_blue {
+    border: 3px solid blue;
+    border: 3px solid blue;
+}
+
+.test {
+    background-color: blue;
+}

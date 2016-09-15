@@ -1,0 +1,57 @@
+/*
+function() {
+    $('.start_button').onclick(function() {
+        alert('Let\'s begin!!');
+    });
+};
+*/
+
+/*
+$(function allowDrop(ev) {
+    ev.preventDefault();
+});
+$(function drag(ev) {
+    ev.dataTransfer.setData("text", ev.target.id);
+});
+$(function drop(ev) {
+    ev.preventDefault();
+    var data = ev.dataTransfer.getData("text");
+    ev.target.appendChild(document.getElementById(data));
+});
+
+
+$(document).ready(function() {
+    $('#red_cow').dragstart(function() {
+    dataTransfer.setData("text" ev.target.id);
+    });
+});
+
+*/
+
+
+@media screen and (min-width: 300px) and (max-width: 600px) {
+    .navbar {
+        position: absolute;
+        left: 0;
+    }
+    
+    .navbar li {
+        font-size: 25px;
+        list-style-type: none;
+        margin-bottom: 50px;
+        text-align: center;
+    }
+    
+    .navbar ul {
+        margin: auto;
+    }
+    
+    .navbar, .game_table {
+        display: inline-block;
+        width: 44%;
+    }
+    
+    .navbar a:hover {
+        color: aliceblue;
+    }
+}
