@@ -1,0 +1,54 @@
+span {
+    position: fixed;
+    left: 10px;
+    top: 80px;
+}
+
+.fa-times-circle {
+    text-align: right;
+}
+
+.side_menu {
+    height: 100%;
+    width: 0;
+    position: fixed;
+    z-index: 1;
+    top: 0;
+    left: 0;
+    background-color: #ccffcc;
+    overflow-x: hidden;
+    transition: 0.5s;
+    padding-top: 60px;
+    text-align:center;
+}
+
+.side_menu a {
+    padding: 8px 8px 8px 32px;
+    text-decoration: none;
+    font-size: 25px;
+    color: #818181;
+    display: block;
+    transition: 0.3s
+
+}
+
+.side_menu a:hover{
+    color: #f1f1f1;
+}
+
+.side_menu .close_button {
+    position: fixed;
+    top: 0;
+    left: 10px;
+    right: 25px;
+    font-size: 36px;
+    margin-left: 50px;
+}
+
+.side_menu ul li:hover {
+    background-color: #e6ffe6;
+}
+
+.side_menu ul li a:hover {
+    color: orange;
+}
