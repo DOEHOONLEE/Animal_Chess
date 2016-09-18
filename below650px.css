@@ -52,3 +52,7 @@ span {
 .side_menu ul li a:hover {
     color: orange;
 }
+
+.header_font_change {
+    font-size: 40px;
+}
