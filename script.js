@@ -17,7 +17,15 @@ function close_side_menu() {
     document.getElementById("side_menu_bar").style.width = "0";
 };
 $(document).ready(function() {
-    $('.fa-bars').hide();
+    if ($(window).width() < 650) {
+        $('.navbar').hide();
+        $('.fa-bars').show();
+        $('#title').removeClass('animal_chess');
+        $('#title').addClass('header_font_change');
+   } else {
+       $('.navbar').show();
+       $('.fa-bars').hide();
+   }
 });
 $(window).on("resize", function() {
    if ($(window).width() < 650) {
