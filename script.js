@@ -10,23 +10,21 @@ function drop(ev) {
     var data = ev.dataTransfer.getData("text");
     ev.target.appendChild(document.getElementById(data));
 };
+function open_side_menu() {
+    document.getElementById("side_menu_bar").style.width = "100%";
+};
+function close_side_menu() {
+    document.getElementById("side_menu_bar").style.width = "0";
+};
+$(document).ready(function() {
+    $('.fa-bars').hide();
+});
 $(window).on("resize", function() {
-   if ($(window).width() < 700) {
+   if ($(window).width() < 650) {
         $('.navbar').hide();
-   } else {$('.navbar').show();}
-});
-$(document).ready(function() {
-    $('td').on('click', function() {
-        $('td').addClass(hi);
-    });
-});
-$(document).ready(function() {
-    $('#red_lion').on('click', function() {
-        alert("is this working?");
-    });
-});
-$(document).ready(function() {
-    $('button').on('click', function() {
-        
-    });
+        $('.fa-bars').show();
+   } else {
+       $('.navbar').show();
+       $('.fa-bars').hide();
+   }
 });
