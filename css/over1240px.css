@@ -24,6 +24,11 @@ li {
     list-style-type: none;
 }
 
+.navbar ul {
+    margin: 0;
+    padding-left: 0px;
+}
+
 .navbar li {
     font-size: 25px;
     display: inline-block;
@@ -31,14 +36,9 @@ li {
     padding: 0;
 }
 
-.navbar ul {
-    margin: 0;
-    padding: 0;
-    text-align: center;
-}
-
 .navbar a:hover {
     color: aliceblue;
+    padding-left: 0px;
 }
 
 .game_table, .login_table {
