@@ -15,7 +15,7 @@ span {
     z-index: 1;
     top: 0;
     left: 0;
-    background-color: #ccffcc;
+    background-color: #e6ffcc;
     overflow-x: hidden;
     transition: 0.5s;
     padding-top: 60px;
@@ -29,7 +29,6 @@ span {
     color: #818181;
     display: block;
     transition: 0.3s
-
 }
 
 .side_menu a:hover{
