@@ -102,3 +102,13 @@ input {
 }
 
 button:focus {outline:0;}
+
+input:focus {outline:0;}
+
+.highlight_red {
+    background-color: #ff8080;
+}
+
+.highlight_blue {
+    background-color: #3399ff;
+}
