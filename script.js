@@ -100,7 +100,13 @@ $(document).ready(function() {
     })
 });
 $(document).ready(function() {
-    $('button').click(function() {
-        alert('If you bring your mouse onto the animal you would like to play, it will show the possible movements!');
+    $('.start, .play').click(function() {
+        alert('Let\'s begin!');
     })
 });
+$(document).ready(function() {
+    $('.instruction').click(function() {
+        alert('If you bring your mouse onto the animal you would like to play, it will show the possible movements!');
+    });
+});
+$(document).ready(function() {});

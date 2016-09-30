@@ -93,7 +93,7 @@ input {
     padding-top: 10px;
 }
 
-.start_button {
+.btn {
     display: block;
     margin: 0 auto;
     font-size: 20px;
@@ -111,4 +111,11 @@ input:focus {outline:0;}
 
 .highlight_blue {
     background-color: #3399ff;
+}
+
+.header_font_change {
+    text-align: center;
+    font-size: 39px;
+    margin-top: 10px;
+    margin-bottom: 10px;
 }

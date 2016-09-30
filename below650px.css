@@ -1,7 +1,7 @@
 span {
     position: fixed;
     left: 10px;
-    top: 80px;
+    top: 60px;
 }
 
 .fa-times-circle {
@@ -23,7 +23,7 @@ span {
 }
 
 .side_menu a {
-    padding: 8px 8px 8px 32px;
+    padding: 8px 8px 8px 8px;
     text-decoration: none;
     font-size: 25px;
     color: #818181;
@@ -54,8 +54,4 @@ span {
 
 .side_menu ul li a:hover {
     color: orange;
-}
-
-.header_font_change {
-    font-size: 40px;
 }
