@@ -19,8 +19,8 @@ $(document).ready(function() {
     if ($(window).width() < 650) {
         $('.navbar').hide();
         $('.fa-bars').show();
-        $('#title').removeClass('animal_chess');
         $('#title').addClass('header_font_change');
+        $('#title').removeClass('animal_chess');
    } else {
        $('.navbar').show();
        $('.fa-bars').hide();
