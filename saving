@@ -55,3 +55,101 @@ $(document).ready(function() {
         color: aliceblue;
     }
 }
+
+
+
+
+
+
+$(document).ready(function() {
+    $('#red_cow').mouseover(function() {
+        $('#col_1_2').addClass('highlight_red');
+        $('#col_2_1').addClass('highlight_red');
+    }
+)});
+$(document).ready(function() {
+    $('#red_cow').mouseleave(function() {
+        $('#col_1_2').removeClass('highlight_red');
+        $('#col_2_1').removeClass('highlight_red');
+    }
+)});
+$(document).ready(function() {
+    $('#red_lion').mouseover(function() {
+        $('#col_1_1').addClass('highlight_red');
+        $('#col_1_3').addClass('highlight_red');
+        $('#col_2_2').addClass('highlight_red');
+    }
+)};
+$(document).ready.(function() {
+    $('#red_cow').mouseleave(function() {
+        $('#col_1_1').removeClass('highlight_red');
+        $('#col_1_3').removeClass('highlight_red');
+        $('#col_2_2').addClass('highlight_red');
+    }
+)});
+$(document).ready(function() {
+    $('#red_rabbit').mouseover(function() {
+        $('#col_2_2').addClass('highlight_red');
+    }
+)};
+$(document).ready(function() {
+    $('#red_cow').mouseleave(function() {
+        $('#col_2_2').removeClass('highlight_red');
+    }
+)});
+$(document).ready(function() {
+    $('#red_sheep').mouseover(function() {
+        $('#col_3_2').addClass('highlight_red');
+    }
+)};
+$(document).ready(function() {
+    $('#red_cow').mouseleave(function() {
+        $('#col_3_2').removeClass('highlight_red');
+    }
+)});
+$(document).ready(function() {
+    $('#blue_cow').mouseover(function() {
+        $('#col_3_3').addClass('highlight_blue');
+        $('#col_4_2').addClass('highlight_blue');
+    }
+)};
+$(document).ready(function() {
+    $('#red_cow').mouseleave(function() {
+        $('#col_3_3').removeClass('highlight_blue');
+        $('#col_4_2').removeClass('highlight_blue');
+    }
+)});
+$(document).ready(function() {
+    $('#blue_tiger').mouseover(function() {
+        $('#col_4_1').addClass('highlight_blue');
+        $('#col_3_2').addClass('highlight_blue');
+        $('#col_4_3').addClass('highlight_blue');
+    }
+)};
+$(document).ready(function() {
+    $('#red_cow').mouseleave(function() {
+        $('#col_4_1').removeClass('highlight_blue');
+        $('#col_3_2').removeClass('highlight_blue');
+        $('#col_4_3').removeClass('highlight_blue');
+    }
+)});
+$(document).ready(function() {
+    $('#blue_rabbit').mouseover(function() {
+        $('#col_3_2').addClass('highlight_blue');
+    }
+)};
+$(document).ready(function() {
+    $('#red_cow').mouseleave(function() {
+        $('#col_3_2').removeClass('highlight_blue');
+    }
+)});
+$(document).ready(function() {
+    $('#blue_sheep').mouseover(function() {
+        $('#col_2_2').addClass('highlight_blue');
+    }
+)};
+$(document).ready(function() {
+    $('#red_cow').mouseleave(function() {
+        $('#col_2_2').removeClass('highlight_blue');
+    }
+)});

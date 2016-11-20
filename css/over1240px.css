@@ -59,8 +59,8 @@ li {
 .game_board td {
     padding: 0px;
     border: 2px solid black;
-    width: 93px;
-    height: 93pxpx;
+    width: 111px;
+    height: 111px;
 }
 
 .team_red, .team_blue {
