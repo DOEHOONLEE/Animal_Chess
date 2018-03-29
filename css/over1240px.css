@@ -43,24 +43,32 @@ li {
 
 .game_table, .login_table {
     border: 2px solid black;
-    width: 340px;
-    height: 468px;
+    width: 346px;
+    height: 466px;
     margin-top: 10px;
     margin-bottom: auto;
     margin-left: auto;
     margin-right: auto;
 }
 
-.game_board {
+#game_board {
     width: 340px;
     height: 468px;
 }
 
-.game_board td {
-    padding: 0px;
-    border: 2px solid black;
+#game_board tr {
+    width: 342px;
+    height: 112px;
+    padding: 0;
+}
+
+#game_board td {
+    border: 1px solid black;
     width: 111px;
     height: 111px;
+    table-layout: fixed;
+    overflow: hidden;
+    padding: 0px;
 }
 
 .team_red, .team_blue {
@@ -118,4 +126,21 @@ input:focus {outline:0;}
     font-size: 39px;
     margin-top: 10px;
     margin-bottom: 10px;
+}
+
+table td > img {
+    overflow: hidden;
+}
+
+table td {
+    padding: 0;
+}
+
+img {
+    width: 105px;
+    height: 106px;
+    font-size: 0;
+    display: block;
+    margin: 0 auto;
+    padding: 0;
 }
