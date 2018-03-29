@@ -7,9 +7,7 @@
         <link rel="stylesheet" href="./font-awesome-4.6.3/css/font-awesome.min.css">
         <link rel="stylesheet" type="text/css" href="./css/over1240px.css" />
         <link rel="stylesheet" type="text/css" href="below650px.css" />
-        <script type="text/javascript" src="./jquery/jquery-3.1.0.min.js"></script>
-        <scipt type="text/javascript" src="./jquery/jquery-ui-1.12.0/" ></scipt>
-        <script type="text/javascript" src="./script.js"></script>
+        <script type="text/javascript" src="jquery/jquery-3.1.0.min.js"></script>
     </head>
     <body>
         <div class="header">
@@ -35,27 +33,8 @@
             </ul>
         </div>
         <div class="game_table">
-            <table class="game_board">
-                <tr>
-                    <td ondrop="drop(event)" ondragover="allowDrop(event)"><img draggable="true" ondragstart="drag(event)" id="red_cow" class="team_red" src="./images/cow.png" /></td>
-                    <td ondrop="drop(event)" ondragover="allowDrop(event)"><img draggable="true" ondragstart="drag(event)" id="red_lion" class="team_red" src="./images/lion.png" /></td>
-                    <td ondrop="drop(event)" ondragover="allowDrop(event)"><img draggable="true" ondragstart="drag(event)" id="red_rabbit" class="team_red" src="./images/rabbit.png" /></td>
-                </tr>
-                <tr>
-                    <td ondrop="drop(event)" ondragover="allowDrop(event)"></td>
-                    <td ondrop="drop(event)" ondragover="allowDrop(event)"><img draggable="true" ondragstart="drag(event)" id="red_sheep" class="team_red" src="./images/sheep.png" /></td>
-                    <td ondrop="drop(event)" ondragover="allowDrop(event)"></td>
-                </tr>
-                <tr>
-                    <td ondrop="drop(event)" ondragover="allowDrop(event)"></td>
-                    <td ondrop="drop(event)" ondragover="allowDrop(event)"><img draggable="true" ondragstart="drag(event)" id="blue_sheep" class="team_blue" src="./images/sheep.png" /></td>
-                    <td ondrop="drop(event)" ondragover="allowDrop(event)"></td>
-                </tr>
-                <tr>
-                    <td ondrop="drop(event)" ondragover="allowDrop(event)"><img draggable="true" ondragstart="drag(event)" id="blue_rabbit" class="team_blue" src="./images/rabbit.png" /></td>
-                    <td ondrop="drop(event)" ondragover="allowDrop(event)"><img draggable="true" ondragstart="drag(event)" id="blue_tiger" class="team_blue" src="./images/tiger.png" /></td>
-                    <td ondrop="drop(event)" ondragover="allowDrop(event)"><img draggable="true" ondragstart="drag(event)" id="blue_cow" class="team_blue" src="./images/cow.png" /></td>
-                </tr>
+            <table id="game_board" border="2px">
+                
             </table>
         </div>
         <div class="button">
@@ -64,5 +43,7 @@
         <div class="copyright">
             <h3> &copy; 2016 - website built by Doe Hoon LEE </h3>
         </div>
+        <script type="text/javascript" src="responsive.js"></script>
+        <script type="text/javascript" src="script.js"></script>
     </body>
 </html>

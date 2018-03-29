@@ -1,112 +1,177 @@
-function allowDrop(ev) {
-    ev.preventDefault();
+// VARIABLES
+
+    // cell ID
+var cellId = 0;
+var dragged;
+
+var selectedAnimal;
+var animalPosition;
+
+    // animals
+
+var animalsInfo = {
+    "animal": [{
+        "name": "cow",
+        "url": "./images/cow.png"
+    }, {
+        "name": "lion",
+        "url": "./images/lion.png"
+    }, {
+        "name": "rabbit",
+        "url": "./images/rabbit.png"
+    }, {
+        "name": "sheep",
+        "url": "./images/sheep.png"
+    }]
 };
-function drag(ev) {
-    ev.dataTransfer.setData("text", ev.target.id);
+
+// FUNCTIONS
+
+    // game table grid with ID numbers
+function setGameTable() {
+    var table = document.getElementById("game_board");
+    table.style.tableLayout = "fixed";
+    
+    for (var i=0; i<4; i++) {
+        var row = document.createElement("tr");
+        
+        for (var c=0; c<3; c++) {
+            var cell = document.createElement("td");
+            
+            // add drop event listener to td
+            cell.addEventListener("drop", function(event) {
+                event.preventDefault();
+                //dragged = event.dataTransfer.getData("text")
+                dragged.parentNode.removeChild(dragged);
+                event.target.appendChild(dragged);
+                for (var i=0; i<12; i++) {
+                    var cellStyle = document.getElementById(i);
+                    cellStyle.style.backgroundColor = "";
+                    cellStyle.style.opacity = "";
+                }
+            }, false);
+            
+            //var cellImg = document.createElement("img");
+            
+            row.style.height = "112px";
+            cell.style.width = "111px";
+            cell.style.height = "112px";
+            cell.id = cellId;
+            cellId++;
+            /*
+            cellImg.src="";
+            cellImg.style.width = "105px";
+            cellImg.style.height = "106px";
+            cellImg.style.border="";
+            cellImg.alt = "";
+            cellImg.style.fontSize = "0";
+            cellImg.style.overflow = "hidden";
+            cellImg.style.display = "block";
+            cellImg.style.margin = "0 auto";
+            cellImg.id = "img"+cellId;
+            
+            cell.appendChild(cellImg);
+            */
+            row.appendChild(cell);
+            //cell.innerHTML = cellId;
+        }
+        table.appendChild(row);
+    }
 };
-function drop(ev) {
-    ev.preventDefault();
-    var data = ev.dataTransfer.getData("text");
-    ev.target.appendChild(document.getElementById(data));
-};
-function open_side_menu() {
-    document.getElementById("side_menu_bar").style.width = "100%";
-};
-function close_side_menu() {
-    document.getElementById("side_menu_bar").style.width = "0";
-};
-$(document).ready(function() {
-    if ($(window).width() < 650) {
-        $('.navbar').hide();
-        $('.fa-bars').show();
-        $('#title').addClass('header_font_change');
-        $('#title').removeClass('animal_chess');
-   } else {
-       $('.navbar').show();
-       $('.fa-bars').hide();
-   }
-});
-$(window).on("resize", function() {
-   if ($(window).width() < 650) {
-        $('.navbar').hide();
-        $('.fa-bars').show();
-   } else {
-       $('.navbar').show();
-       $('.fa-bars').hide();
-   }
-});
-$(document).ready(function() {
-    $('#red_cow').mouseover(function() {
-        $('#col_1_2, #col_2_1').addClass('highlight_red');
-    })
-    $('#red_cow').mouseleave(function() {
-        $('#col_1_2, #col_2_1').removeClass('highlight_red');
-    })
-});
-$(document).ready(function() {
-    $('#red_lion').mouseover(function() {
-        $('#col_1_1, #col_1_3, #col_2_2').addClass('highlight_red');
-    })
-    $('#red_lion').mouseleave(function() {
-        $('#col_1_1, #col_1_3, #col_2_2').removeClass('highlight_red');
-    })
-});
-$(document).ready(function() {
-    $('#red_rabbit').mouseover(function() {
-        $('#col_2_2').addClass('highlight_red');
-    })
-    $('#red_rabbit').mouseleave(function() {
-        $('#col_2_2').removeClass('highlight_red');
-    })
-});
-$(document).ready(function() {
-    $('#red_sheep').mouseover(function() {
-        $('#col_3_2').addClass('highlight_red');
-    })
-    $('#red_sheep').mouseleave(function() {
-        $('#col_3_2').removeClass('highlight_red');
-    })
-});
-$(document).ready(function() {
-    $('#blue_cow').mouseover(function() {
-        $('#col_3_3, #col_4_2').addClass('highlight_blue');
-    })
-    $('#blue_cow').mouseleave(function() {
-        $('#col_3_3, #col_4_2').removeClass('highlight_blue');
-    })
-});
-$(document).ready(function() {
-    $('#blue_tiger').mouseover(function() {
-        $('#col_3_2, #col_4_1, #col_4_3').addClass('highlight_blue');
-    })
-    $('#blue_tiger').mouseleave(function() {
-        $('#col_3_2, #col_4_1, #col_4_3').removeClass('highlight_blue');
-    })
-});
-$(document).ready(function() {
-    $('#blue_rabbit').mouseover(function() {
-        $('#col_3_2').addClass('highlight_blue');
-    })
-    $('#blue_rabbit').mouseleave(function() {
-        $('#col_3_2').removeClass('highlight_blue');
-    })
-});
-$(document).ready(function() {
-    $('#blue_sheep').mouseover(function() {
-        $('#col_2_2').addClass('highlight_blue');
-    })
-    $('#blue_sheep').mouseleave(function() {
-        $('#col_2_2').removeClass('highlight_blue');
-    })
-});
-$(document).ready(function() {
-    $('.start, .play').click(function() {
-        alert('Let\'s begin!');
-    })
-});
-$(document).ready(function() {
-    $('.instruction').click(function() {
-        alert('If you bring your mouse onto the animal you would like to play, it will show the possible movements!');
-    });
-});
-$(document).ready(function() {});
+
+    // default animal positions
+function defaultPos() {
+    for (var i=0; i<4; i++) {
+        // create animal image tags
+        var ani = document.createElement("img");
+        
+        // make images draggable
+        ani.setAttribute("draggable", "true");
+        ani.setAttribute("ondragstart", "event.dataTransfer.setData('text/plain',event.target.id)");
+        
+        // set animal IDs
+        ani.id = animalsInfo.animal[i].name;
+        
+        // animal image sources
+        ani.src = animalsInfo.animal[i].url;
+        
+        // add drag eventlistner
+        ani.addEventListener("drag", function(event) {
+            event.dataTransfer.setData("text", event.target.id);
+        }, false)
+        ani.addEventListener("dragstart", function(event) {
+            dragged = event.target;
+            
+            // check valid moves when animal is picked up
+            validMoves();
+        }, false)
+        
+        // append to html
+        if (i==3) {
+            document.getElementById(i+1).appendChild(ani);
+        }
+        else {
+            document.getElementById(i).appendChild(ani);
+        }
+        
+    }
+}
+
+    // allow dragging
+document.addEventListener("dragover", function(event) {
+    event.preventDefault();
+}, false);
+
+    // check valid moves
+
+function validMoves() {
+    selectedAnimal = dragged.id;
+    animalPosition = Number(dragged.parentNode.id);
+    console.log("Your animal is " + dragged.id + " and is " + "currently at " + animalPosition);
+    
+    
+    if (dragged.id == "cow") {
+        if (animalPosition == 4 || animalPosition == 7) {
+            document.getElementById(Math.abs(animalPosition-3)).style.backgroundColor = "skyblue";
+            document.getElementById(Math.abs(animalPosition+3)).style.backgroundColor = "skyblue";
+            document.getElementById(Math.abs(animalPosition-1)).style.backgroundColor = "skyblue";
+            document.getElementById(Math.abs(animalPosition+1)).style.backgroundColor = "skyblue";
+            document.getElementById(animalPosition).style.opacity = "0.3";
+        }
+    }
+    else if (dragged.id == "lion") {
+        
+    }
+    else if (dragged.id == "rabbit") {
+        
+    }
+    else if (dragged.id == "sheep") {
+        
+    }
+}
+
+
+function moveConfirmation() {
+    
+}
+
+// TEST
+
+function hi() {
+    alert("hi");
+}
+
+// set game table - default
+
+function setAnimalsDef() {
+    // set game table
+    setGameTable();
+    
+    // set animals
+    defaultPos();
+}
+
+// START the game
+
+setAnimalsDef();
+//move();
