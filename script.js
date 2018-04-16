@@ -7,6 +7,8 @@ var dragged;
 var selectedAnimal;
 var animalPosition;
 
+var takenAnimals = [];
+
     // animals
 
 var animalsInfo = {
@@ -41,9 +43,27 @@ function setGameTable() {
             // add drop event listener to td
             cell.addEventListener("drop", function(event) {
                 event.preventDefault();
-                //dragged = event.dataTransfer.getData("text")
+                //dragged = event.dataTransfer.getData("text");
                 dragged.parentNode.removeChild(dragged);
-                event.target.appendChild(dragged);
+                
+                
+                // check if the target is another animal or an empty cell
+                var checkTarget = event.target.id;
+                // get event target's parents' ID
+                var targetCellId = event.target.parentNode.id;
+                
+                if (isNaN(checkTarget)) {
+                    console.log(targetCell);
+                    
+                    // move the animal to the cell
+                    var targetCell = document.getElementById(targetCellId);
+                    targetCell.appendChild(dragged);
+                }
+                else {
+                    event.target.appendChild(dragged);
+                }
+
+                // stop showing available moves
                 for (var i=0; i<12; i++) {
                     var cellStyle = document.getElementById(i);
                     cellStyle.style.backgroundColor = "";
@@ -127,15 +147,15 @@ document.addEventListener("dragover", function(event) {
 function validMoves() {
     selectedAnimal = dragged.id;
     animalPosition = Number(dragged.parentNode.id);
-    console.log("Your animal is " + dragged.id + " and is " + "currently at " + animalPosition);
+    console.log("Your animal is " + dragged.id + " and is " + "moved from " + animalPosition);
     
     
     if (dragged.id == "cow") {
         if (animalPosition == 4 || animalPosition == 7) {
-            document.getElementById(Math.abs(animalPosition-3)).style.backgroundColor = "skyblue";
-            document.getElementById(Math.abs(animalPosition+3)).style.backgroundColor = "skyblue";
-            document.getElementById(Math.abs(animalPosition-1)).style.backgroundColor = "skyblue";
-            document.getElementById(Math.abs(animalPosition+1)).style.backgroundColor = "skyblue";
+            document.getElementById(Math.abs(animalPosition-3)).style.backgroundColor = "#B7E2F3";
+            document.getElementById(Math.abs(animalPosition+3)).style.backgroundColor = "#B7E2F3";
+            document.getElementById(Math.abs(animalPosition-1)).style.backgroundColor = "#B7E2F3";
+            document.getElementById(Math.abs(animalPosition+1)).style.backgroundColor = "#B7E2F3";
             document.getElementById(animalPosition).style.opacity = "0.3";
         }
     }
