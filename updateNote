@@ -8,3 +8,4 @@ animal - 96 * 96
 
 
 - remove an animal when it's taken
+- when animal is clicked and not moved, it disappears

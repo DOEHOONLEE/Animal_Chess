@@ -11,6 +11,7 @@ var takenAnimals = [];
 
     // animals
 
+// TEAM RED
 var animalsInfo = {
     "animal": [{
         "name": "cow",
@@ -24,6 +25,23 @@ var animalsInfo = {
     }, {
         "name": "sheep",
         "url": "./images/sheep.png"
+    }]
+};
+
+// TEAM BLUE
+var animalsInfoBlue = {
+    "animalBlue": [{
+        "name": "cowBlue",
+        "url": "./images/cow_blue.png"
+    }, {
+        "name": "tiger",
+        "url": "./images/tiger.png"
+    }, {
+        "name": "rabbitBlue",
+        "url": "./images/rabbit_blue.png"
+    }, {
+        "name": "sheepBlue",
+        "url": "./images/sheep_blue.png"
     }]
 };
 
@@ -104,16 +122,39 @@ function defaultPos() {
     for (var i=0; i<4; i++) {
         // create animal image tags
         var ani = document.createElement("img");
+        var aniBlue = document.createElement("img");
         
         // make images draggable
         ani.setAttribute("draggable", "true");
         ani.setAttribute("ondragstart", "event.dataTransfer.setData('text/plain',event.target.id)");
         
-        // set animal IDs
-        ani.id = animalsInfo.animal[i].name;
+            // SET TEAM COLORS
+        // TEAM RED
+        ani.style.border = "3px solid red";
+        // TEAM BLUE
+        aniBlue.style.border = "3px solid blue";
         
-        // animal image sources
+            // animals ID
+        // TEAM RED
+        ani.id = animalsInfo.animal[i].name;
+        // TEAM BLUE
+        aniBlue.id = animalsInfoBlue.animalBlue[i].name;
+        
+            // animals images sources
+        // TEAM RED
         ani.src = animalsInfo.animal[i].url;
+        // TEAM BLUE
+        aniBlue.src = animalsInfoBlue.animalBlue[i].url;
+        
+            // append to html
+        if (i==3) {
+            document.getElementById(i+1).appendChild(ani);
+            document.getElementById(i+4).appendChild(aniBlue);
+        }
+        else {
+            document.getElementById(i).appendChild(ani);
+            document.getElementById(i+9).appendChild(aniBlue);
+        }
         
         // add drag eventlistner
         ani.addEventListener("drag", function(event) {
@@ -126,13 +167,15 @@ function defaultPos() {
             validMoves();
         }, false)
         
-        // append to html
-        if (i==3) {
-            document.getElementById(i+1).appendChild(ani);
-        }
-        else {
-            document.getElementById(i).appendChild(ani);
-        }
+        aniBlue.addEventListener("drag", function(event) {
+            event.dataTransfer.setData("text", event.target.id);
+        }, false)
+        aniBlue.addEventListener("dragstart", function(event) {
+            dragged = event.target;
+            
+            // check valid moves when animal is picked up
+            validMoves();
+        }, false)
         
     }
 }
@@ -147,6 +190,8 @@ document.addEventListener("dragover", function(event) {
 function validMoves() {
     selectedAnimal = dragged.id;
     animalPosition = Number(dragged.parentNode.id);
+    
+    // animal move log
     console.log("Your animal is " + dragged.id + " and is " + "moved from " + animalPosition);
     
     
@@ -158,16 +203,11 @@ function validMoves() {
             document.getElementById(Math.abs(animalPosition+1)).style.backgroundColor = "#B7E2F3";
             document.getElementById(animalPosition).style.opacity = "0.3";
         }
+        else {
+            
+        }
     }
-    else if (dragged.id == "lion") {
-        
-    }
-    else if (dragged.id == "rabbit") {
-        
-    }
-    else if (dragged.id == "sheep") {
-        
-    }
+    
 }
 
 
