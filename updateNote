@@ -1,11 +1,16 @@
-** width **
+    ** [PLEASE FIX] **
 
-game board - 340 * 470
-animal container - 111 * 115
-animal - 96 * 96
-
-**       **
-
-
-- remove an animal when it's taken
+- show valid moves
 - when animal is clicked and not moved, it disappears
+- restrict moves
+
+    ** [FIXED] **
+- remove an animal when it's taken
+
+
+    ** [REF.] **
+
+- widths
+    game board - 340 * 470
+    animal container - 111 * 115
+    animal - 96 * 96

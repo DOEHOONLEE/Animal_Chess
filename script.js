@@ -62,7 +62,7 @@ function setGameTable() {
             cell.addEventListener("drop", function(event) {
                 event.preventDefault();
                 //dragged = event.dataTransfer.getData("text");
-                dragged.parentNode.removeChild(dragged);
+                //dragged.parentNode.removeChild(dragged);
                 
                 
                 // check if the target is another animal or an empty cell
@@ -71,16 +71,16 @@ function setGameTable() {
                 var targetCellId = event.target.parentNode.id;
                 
                 if (isNaN(checkTarget)) {
-                    console.log(targetCell);
-                    
                     // move the animal to the cell
                     var targetCell = document.getElementById(targetCellId);
                     targetCell.appendChild(dragged);
+                    document.getElementById(checkTarget).remove();
+                    console.log(targetCellId);
                 }
                 else {
                     event.target.appendChild(dragged);
                 }
-
+                
                 // stop showing available moves
                 for (var i=0; i<12; i++) {
                     var cellStyle = document.getElementById(i);
