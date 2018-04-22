@@ -7,20 +7,28 @@ function close_side_menu() {
 $(document).ready(function() {
     if ($(window).width() < 650) {
         $('.navbar').hide();
-        $('.fa-bars').show();
+        $('.sideMenu').show();
         $('#title').addClass('header_font_change');
         $('#title').removeClass('animal_chess');
    } else {
        $('.navbar').show();
-       $('.fa-bars').hide();
+       $('.sideMenu').hide();
    }
 });
 $(window).on("resize", function() {
    if ($(window).width() < 650) {
         $('.navbar').hide();
-        $('.fa-bars').show();
+        $('.sideMenu').show();
    } else {
        $('.navbar').show();
-       $('.fa-bars').hide();
+       $('.sideMenu').hide();
    }
+});
+
+
+var showDeadAnimals = document.getElementById("revivalMenu");
+
+showDeadAnimals.addEventListener("click", function() {
+    var deadAnimalList = document.getElementById("animal_revival");
+    deadAnimalList.style.width = "100%";
 });
