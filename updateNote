@@ -1,11 +1,12 @@
     ** [PLEASE FIX] **
 
 - show valid moves
-- when animal is clicked and not moved, it disappears
+- removed animal not added in the revival list
 - restrict moves
 
     ** [FIXED] **
 - remove an animal when it's taken
+
 
 
     ** [REF.] **

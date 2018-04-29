@@ -1,3 +1,7 @@
+* {
+    text-align: center;
+}
+
 #animal_revival {
     height: 100%;
     width: 0;
@@ -12,18 +16,16 @@
     text-align:center;
 }
 
-#animal_revival .close_button {
-    position: fixed;
-    top: 0;
-    left: 10px;
-    right: 25px;
-    font-size: 36px;
-    margin-left: 50px;
+#animal_revival table {
+    margin: 0 auto;
 }
 
-#revivalMenu {
-    position: fixed;
+#spanTwo {
+    position: absolute;
     z-index: 1;
+    float: right;
     top: 0;
     right: 0;
+    margin-top: 12px;
+    margin-right: 10px;
 }

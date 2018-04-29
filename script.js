@@ -1,5 +1,7 @@
 // VARIABLES
 
+var checkTarget;
+
     // cell ID
 var cellId = 0;
 var dragged;
@@ -49,6 +51,8 @@ var animalsInfoBlue = {
 
     // game table grid with ID numbers
 function setGameTable() {
+    removeKilled();
+    
     var table = document.getElementById("game_board");
     table.style.tableLayout = "fixed";
     
@@ -64,9 +68,9 @@ function setGameTable() {
                 //dragged = event.dataTransfer.getData("text");
                 //dragged.parentNode.removeChild(dragged);
                 
-                
                 // check if the target is another animal or an empty cell
-                var checkTarget = event.target.id;
+                checkTarget = event.target.id;
+                
                 // get event target's parents' ID
                 var targetCellId = event.target.parentNode.id;
                 
@@ -74,8 +78,12 @@ function setGameTable() {
                     // move the animal to the cell
                     var targetCell = document.getElementById(targetCellId);
                     targetCell.appendChild(dragged);
+                   
+                    // removed killed animal
                     document.getElementById(checkTarget).remove();
+                    
                     console.log(targetCellId);
+                    console.log(checkTarget);
                 }
                 else {
                     event.target.appendChild(dragged);
@@ -210,15 +218,35 @@ function validMoves() {
     
 }
 
+    // add removed animals to the revival list
+
+function removeKilled() {
+    var table = document.getElementById("dead_animals");
+    table.style.tableLayout = "fixed";
+    
+    for (var i=0; i<2; i++) {
+        var row = document.createElement("tr");
+        
+        for (var c=0; c<4; c++) {
+            var cell = document.createElement("td");
+            
+            row.style.height = "112px";
+            cell.style.width = "111px";
+            cell.style.height = "112px";
+            
+            var num = 20;
+            cell.id = num;
+            num++;
+            
+            row.appendChild(cell);
+        }
+
+        table.appendChild(row);
+    }
+}
 
 function moveConfirmation() {
     
-}
-
-// TEST
-
-function hi() {
-    alert("hi");
 }
 
 // set game table - default

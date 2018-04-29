@@ -19,16 +19,24 @@ $(window).on("resize", function() {
    if ($(window).width() < 650) {
         $('.navbar').hide();
         $('.sideMenu').show();
+       $('#revivalMenuOpen').show();
    } else {
        $('.navbar').show();
        $('.sideMenu').hide();
+       $('#revivalMenuOpen').hide();
    }
 });
 
+var showDeadAnimals = document.getElementById("revivalMenuOpen");
 
-var showDeadAnimals = document.getElementById("revivalMenu");
+var hideDeadAnimals = document.getElementById("revivalMenuClose");
+
+var deadAnimalList = document.getElementById("animal_revival");
 
 showDeadAnimals.addEventListener("click", function() {
-    var deadAnimalList = document.getElementById("animal_revival");
     deadAnimalList.style.width = "100%";
 });
+
+hideDeadAnimals.addEventListener("click", function() {
+    deadAnimalList.style.width = "0%";
+})
