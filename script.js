@@ -82,6 +82,7 @@ function setGameTable() {
                     // removed killed animal
                     document.getElementById(checkTarget).remove();
                     
+                    document.getElementById(20).appendChild(checkTarget);
                     console.log(targetCellId);
                     console.log(checkTarget);
                 }
