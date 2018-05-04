@@ -1,13 +1,13 @@
     ** [PLEASE FIX] **
 
 - show valid moves
-- removed animal not added in the revival list
 - restrict moves
+
 
     ** [FIXED] **
 - remove an animal when it's taken
-
-
+- killed animal not added in the revival list
+- (self-killing)allow move cancellation - animal is automatically dead when it is picked and dropped
 
     ** [REF.] **
 

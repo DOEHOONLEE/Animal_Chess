@@ -6,6 +6,9 @@ var checkTarget;
 var cellId = 0;
 var dragged;
 
+    // revival cellID
+var revCellId = 20;
+
 var selectedAnimal;
 var animalPosition;
 
@@ -51,7 +54,7 @@ var animalsInfoBlue = {
 
     // game table grid with ID numbers
 function setGameTable() {
-    removeKilled();
+    createRevivalList();
     
     var table = document.getElementById("game_board");
     table.style.tableLayout = "fixed";
@@ -74,20 +77,25 @@ function setGameTable() {
                 // get event target's parents' ID
                 var targetCellId = event.target.parentNode.id;
                 
-                if (isNaN(checkTarget)) {
-                    // move the animal to the cell
+                if (isNaN(checkTarget)) {    
+                    if (dragged.id !== checkTarget) {
+                        // move the animal to the cell
                     var targetCell = document.getElementById(targetCellId);
                     targetCell.appendChild(dragged);
                    
-                    // removed killed animal
-                    document.getElementById(checkTarget).remove();
                     
-                    document.getElementById(20).appendChild(checkTarget);
-                    console.log(targetCellId);
-                    console.log(checkTarget);
+                    // move the killed animals to the revival list
+                    addToRevival();
+                    
+                    // spell out the moves
+                    console.log(dragged.id, checkTarget);
+                    }
                 }
                 else {
                     event.target.appendChild(dragged);
+                    
+                    // spell out the moves
+                    console.log(dragged.id, checkTarget);
                 }
                 
                 // stop showing available moves
@@ -219,9 +227,9 @@ function validMoves() {
     
 }
 
-    // add removed animals to the revival list
+    // revival list
 
-function removeKilled() {
+function createRevivalList() {
     var table = document.getElementById("dead_animals");
     table.style.tableLayout = "fixed";
     
@@ -235,9 +243,8 @@ function removeKilled() {
             cell.style.width = "111px";
             cell.style.height = "112px";
             
-            var num = 20;
-            cell.id = num;
-            num++;
+            cell.id = revCellId;
+            revCellId++;
             
             row.appendChild(cell);
         }
@@ -245,6 +252,20 @@ function removeKilled() {
         table.appendChild(row);
     }
 }
+    // move killed animals to the revival list
+function addToRevival() {
+    var killedAnimal = document.getElementById(checkTarget);
+    
+    for (var i=20; i<28; i++) {
+        var revCellContent = document.getElementById(i).children.length;
+        if (revCellContent == 0) {
+            document.getElementById(i).appendChild(killedAnimal);
+            break;
+        }
+    }
+}
+
+    // valid moves
 
 function moveConfirmation() {
     
@@ -262,5 +283,12 @@ function setAnimalsDef() {
 
 // START the game
 
-setAnimalsDef();
-//move();
+function start() {
+    var onStartClick = document.getElementById("start");
+    onStartClick.addEventListener("click", function() {
+        location.reload();
+    });
+    setAnimalsDef();
+}
+
+start();
