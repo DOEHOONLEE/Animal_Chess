@@ -1,10 +1,17 @@
-** width **
+    ** [PLEASE FIX] **
 
-game board - 340 * 470
-animal container - 111 * 115
-animal - 96 * 96
-
-**       **
+- show valid moves
+- restrict moves
 
 
+    ** [FIXED] **
 - remove an animal when it's taken
+- killed animal not added in the revival list
+- (self-killing)allow move cancellation - animal is automatically dead when it is picked and dropped
+
+    ** [REF.] **
+
+- widths
+    game board - 340 * 470
+    animal container - 111 * 115
+    animal - 96 * 96

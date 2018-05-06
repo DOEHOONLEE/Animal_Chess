@@ -1,8 +1,13 @@
 // VARIABLES
 
+var checkTarget;
+
     // cell ID
 var cellId = 0;
 var dragged;
+
+    // revival cellID
+var revCellId = 20;
 
 var selectedAnimal;
 var animalPosition;
@@ -11,6 +16,7 @@ var takenAnimals = [];
 
     // animals
 
+// TEAM RED
 var animalsInfo = {
     "animal": [{
         "name": "cow",
@@ -27,10 +33,29 @@ var animalsInfo = {
     }]
 };
 
+// TEAM BLUE
+var animalsInfoBlue = {
+    "animalBlue": [{
+        "name": "cowBlue",
+        "url": "./images/cow_blue.png"
+    }, {
+        "name": "tiger",
+        "url": "./images/tiger.png"
+    }, {
+        "name": "rabbitBlue",
+        "url": "./images/rabbit_blue.png"
+    }, {
+        "name": "sheepBlue",
+        "url": "./images/sheep_blue.png"
+    }]
+};
+
 // FUNCTIONS
 
     // game table grid with ID numbers
 function setGameTable() {
+    createRevivalList();
+    
     var table = document.getElementById("game_board");
     table.style.tableLayout = "fixed";
     
@@ -44,25 +69,35 @@ function setGameTable() {
             cell.addEventListener("drop", function(event) {
                 event.preventDefault();
                 //dragged = event.dataTransfer.getData("text");
-                dragged.parentNode.removeChild(dragged);
-                
+                //dragged.parentNode.removeChild(dragged);
                 
                 // check if the target is another animal or an empty cell
-                var checkTarget = event.target.id;
+                checkTarget = event.target.id;
+                
                 // get event target's parents' ID
                 var targetCellId = event.target.parentNode.id;
                 
-                if (isNaN(checkTarget)) {
-                    console.log(targetCell);
-                    
-                    // move the animal to the cell
+                if (isNaN(checkTarget)) {    
+                    if (dragged.id !== checkTarget) {
+                        // move the animal to the cell
                     var targetCell = document.getElementById(targetCellId);
                     targetCell.appendChild(dragged);
+                   
+                    
+                    // move the killed animals to the revival list
+                    addToRevival();
+                    
+                    // spell out the moves
+                    console.log(dragged.id, checkTarget);
+                    }
                 }
                 else {
                     event.target.appendChild(dragged);
+                    
+                    // spell out the moves
+                    console.log(dragged.id, checkTarget);
                 }
-
+                
                 // stop showing available moves
                 for (var i=0; i<12; i++) {
                     var cellStyle = document.getElementById(i);
@@ -104,16 +139,39 @@ function defaultPos() {
     for (var i=0; i<4; i++) {
         // create animal image tags
         var ani = document.createElement("img");
+        var aniBlue = document.createElement("img");
         
         // make images draggable
         ani.setAttribute("draggable", "true");
         ani.setAttribute("ondragstart", "event.dataTransfer.setData('text/plain',event.target.id)");
         
-        // set animal IDs
-        ani.id = animalsInfo.animal[i].name;
+            // SET TEAM COLORS
+        // TEAM RED
+        ani.style.border = "3px solid red";
+        // TEAM BLUE
+        aniBlue.style.border = "3px solid blue";
         
-        // animal image sources
+            // animals ID
+        // TEAM RED
+        ani.id = animalsInfo.animal[i].name;
+        // TEAM BLUE
+        aniBlue.id = animalsInfoBlue.animalBlue[i].name;
+        
+            // animals images sources
+        // TEAM RED
         ani.src = animalsInfo.animal[i].url;
+        // TEAM BLUE
+        aniBlue.src = animalsInfoBlue.animalBlue[i].url;
+        
+            // append to html
+        if (i==3) {
+            document.getElementById(i+1).appendChild(ani);
+            document.getElementById(i+4).appendChild(aniBlue);
+        }
+        else {
+            document.getElementById(i).appendChild(ani);
+            document.getElementById(i+9).appendChild(aniBlue);
+        }
         
         // add drag eventlistner
         ani.addEventListener("drag", function(event) {
@@ -126,13 +184,38 @@ function defaultPos() {
             validMoves();
         }, false)
         
-        // append to html
-        if (i==3) {
-            document.getElementById(i+1).appendChild(ani);
-        }
-        else {
-            document.getElementById(i).appendChild(ani);
-        }
+        aniBlue.addEventListener("drag", function(event) {
+            event.dataTransfer.setData("text", event.target.id);
+        }, false)
+        aniBlue.addEventListener("dragstart", function(event) {
+            dragged = event.target;
+            
+            // check valid moves when animal is picked up
+            validMoves();
+        }, false)
+        
+        // TOUCH EVENTS?
+        ani.addEventListener("touchmove", function(event) {
+            event.dataTransfer.setData("text", event.target.id);
+        }, false)
+        ani.addEventListener("touchstart", function(event) {
+            dragged = event.target;
+            
+            // check valid moves when animal is picked up
+            validMoves();
+        }, false)
+        
+        aniBlue.addEventListener("touchmove", function(event) {
+            event.dataTransfer.setData("text", event.target.id);
+        }, false)
+        aniBlue.addEventListener("touchstart", function(event) {
+            dragged = event.target;
+            
+            // check valid moves when animal is picked up
+            validMoves();
+        }, false)
+        
+        // TOUCH EVENTS?
         
     }
 }
@@ -147,6 +230,8 @@ document.addEventListener("dragover", function(event) {
 function validMoves() {
     selectedAnimal = dragged.id;
     animalPosition = Number(dragged.parentNode.id);
+    
+    // animal move log
     console.log("Your animal is " + dragged.id + " and is " + "moved from " + animalPosition);
     
     
@@ -158,27 +243,55 @@ function validMoves() {
             document.getElementById(Math.abs(animalPosition+1)).style.backgroundColor = "#B7E2F3";
             document.getElementById(animalPosition).style.opacity = "0.3";
         }
+        else {
+            
+        }
     }
-    else if (dragged.id == "lion") {
-        
-    }
-    else if (dragged.id == "rabbit") {
-        
-    }
-    else if (dragged.id == "sheep") {
-        
-    }
-}
-
-
-function moveConfirmation() {
     
 }
 
-// TEST
+    // revival list
 
-function hi() {
-    alert("hi");
+function createRevivalList() {
+    var table = document.getElementById("dead_animals");
+    table.style.tableLayout = "fixed";
+    
+    for (var i=0; i<2; i++) {
+        var row = document.createElement("tr");
+        
+        for (var c=0; c<4; c++) {
+            var cell = document.createElement("td");
+            
+            row.style.height = "112px";
+            cell.style.width = "111px";
+            cell.style.height = "112px";
+            
+            cell.id = revCellId;
+            revCellId++;
+            
+            row.appendChild(cell);
+        }
+
+        table.appendChild(row);
+    }
+}
+    // move killed animals to the revival list
+function addToRevival() {
+    var killedAnimal = document.getElementById(checkTarget);
+    
+    for (var i=20; i<28; i++) {
+        var revCellContent = document.getElementById(i).children.length;
+        if (revCellContent == 0) {
+            document.getElementById(i).appendChild(killedAnimal);
+            break;
+        }
+    }
+}
+
+    // valid moves
+
+function moveConfirmation() {
+    
 }
 
 // set game table - default
@@ -193,5 +306,12 @@ function setAnimalsDef() {
 
 // START the game
 
-setAnimalsDef();
-//move();
+function start() {
+    var onStartClick = document.getElementById("start");
+    onStartClick.addEventListener("click", function() {
+        location.reload();
+    });
+    setAnimalsDef();
+}
+
+start();

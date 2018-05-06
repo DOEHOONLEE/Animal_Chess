@@ -1,0 +1,31 @@
+* {
+    text-align: center;
+}
+
+#animal_revival {
+    height: 100%;
+    width: 0;
+    position: fixed;
+    z-index: 1;
+    top: 0;
+    right: 0;
+    background-color: #e6ffcc;
+    overflow-x: hidden;
+    transition: 0.5s;
+    padding-top: 60px;
+    text-align:center;
+}
+
+#animal_revival table {
+    margin: 0 auto;
+}
+
+#spanTwo {
+    position: absolute;
+    z-index: 1;
+    float: right;
+    top: 0;
+    right: 0;
+    margin-top: 12px;
+    margin-right: 10px;
+}
