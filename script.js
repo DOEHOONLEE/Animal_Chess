@@ -194,6 +194,29 @@ function defaultPos() {
             validMoves();
         }, false)
         
+        // TOUCH EVENTS?
+        ani.addEventListener("touchmove", function(event) {
+            event.dataTransfer.setData("text", event.target.id);
+        }, false)
+        ani.addEventListener("touchstart", function(event) {
+            dragged = event.target;
+            
+            // check valid moves when animal is picked up
+            validMoves();
+        }, false)
+        
+        aniBlue.addEventListener("touchmove", function(event) {
+            event.dataTransfer.setData("text", event.target.id);
+        }, false)
+        aniBlue.addEventListener("touchstart", function(event) {
+            dragged = event.target;
+            
+            // check valid moves when animal is picked up
+            validMoves();
+        }, false)
+        
+        // TOUCH EVENTS?
+        
     }
 }
 
