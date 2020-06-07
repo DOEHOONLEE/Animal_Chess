@@ -36,14 +36,14 @@ var animalsInfo = {
 // TEAM BLUE
 var animalsInfoBlue = {
     "animalBlue": [{
-        "name": "cowBlue",
-        "url": "./images/cow_blue.png"
+        "name": "rabbitBlue",
+        "url": "./images/rabbit_blue.png"
     }, {
         "name": "tiger",
         "url": "./images/tiger.png"
     }, {
-        "name": "rabbitBlue",
-        "url": "./images/rabbit_blue.png"
+        "name": "cowBlue",
+        "url": "./images/cow_blue.png"
     }, {
         "name": "sheepBlue",
         "url": "./images/sheep_blue.png"
@@ -54,7 +54,7 @@ var animalsInfoBlue = {
 
     // game table grid with ID numbers
 function setGameTable() {
-    createRevivalList();
+    drawRevivalList();
     
     var table = document.getElementById("game_board");
     table.style.tableLayout = "fixed";
@@ -68,10 +68,33 @@ function setGameTable() {
             // add drop event listener to td
             cell.addEventListener("drop", function(event) {
                 event.preventDefault();
-                //dragged = event.dataTransfer.getData("text");
-                //dragged.parentNode.removeChild(dragged);
                 
-                // check if the target is another animal or an empty cell
+                drawTable();
+                
+            }, false);
+            
+            cell.addEventListener("touchend", function(event) {
+                event.preventDefault();
+                
+                drawTable();
+            }, false);
+            
+            //var cellImg = document.createElement("img");
+            
+            row.style.height = "112px";
+            cell.style.width = "111px";
+            cell.style.height = "112px";
+            cell.id = cellId;
+            cellId++;
+            row.appendChild(cell);
+            //cell.innerHTML = cellId;
+        }
+        table.appendChild(row);
+    }
+};
+
+function drawTable() {
+    // check if the target is another animal or an empty cell
                 checkTarget = event.target.id;
                 
                 // get event target's parents' ID
@@ -104,35 +127,7 @@ function setGameTable() {
                     cellStyle.style.backgroundColor = "";
                     cellStyle.style.opacity = "";
                 }
-            }, false);
-            
-            //var cellImg = document.createElement("img");
-            
-            row.style.height = "112px";
-            cell.style.width = "111px";
-            cell.style.height = "112px";
-            cell.id = cellId;
-            cellId++;
-            /*
-            cellImg.src="";
-            cellImg.style.width = "105px";
-            cellImg.style.height = "106px";
-            cellImg.style.border="";
-            cellImg.alt = "";
-            cellImg.style.fontSize = "0";
-            cellImg.style.overflow = "hidden";
-            cellImg.style.display = "block";
-            cellImg.style.margin = "0 auto";
-            cellImg.id = "img"+cellId;
-            
-            cell.appendChild(cellImg);
-            */
-            row.appendChild(cell);
-            //cell.innerHTML = cellId;
-        }
-        table.appendChild(row);
-    }
-};
+}
 
     // default animal positions
 function defaultPos() {
@@ -194,29 +189,6 @@ function defaultPos() {
             validMoves();
         }, false)
         
-        // TOUCH EVENTS?
-        ani.addEventListener("touchmove", function(event) {
-            event.dataTransfer.setData("text", event.target.id);
-        }, false)
-        ani.addEventListener("touchstart", function(event) {
-            dragged = event.target;
-            
-            // check valid moves when animal is picked up
-            validMoves();
-        }, false)
-        
-        aniBlue.addEventListener("touchmove", function(event) {
-            event.dataTransfer.setData("text", event.target.id);
-        }, false)
-        aniBlue.addEventListener("touchstart", function(event) {
-            dragged = event.target;
-            
-            // check valid moves when animal is picked up
-            validMoves();
-        }, false)
-        
-        // TOUCH EVENTS?
-        
     }
 }
 
@@ -231,28 +203,51 @@ function validMoves() {
     selectedAnimal = dragged.id;
     animalPosition = Number(dragged.parentNode.id);
     
+    // animal valid moves references
+    
+        // COW
+    function cowValid() {
+        document.getElementById(Math.abs(animalPosition-3)).style.backgroundColor = "#B7E2F3";
+        document.getElementById(Math.abs(animalPosition+3)).style.backgroundColor = "#B7E2F3";
+        document.getElementById(Math.abs(animalPosition-1)).style.backgroundColor = "#B7E2F3";
+        document.getElementById(Math.abs(animalPosition+1)).style.backgroundColor = "#B7E2F3";
+    };
+    
+    function blueSheepValid() {
+        document.getElementById(Math.abs(animalPosition-3)).style.backgroundColor = "#B7E2F3";
+    };
+    
+    function redSheepValid() {
+        document.getElementById(Math.abs(animalPosition+3)).style.backgroundColor = "#B7E2F3";
+    };
+    
     // animal move log
     console.log("Your animal is " + dragged.id + " and is " + "moved from " + animalPosition);
     
-    
-    if (dragged.id == "cow") {
-        if (animalPosition == 4 || animalPosition == 7) {
-            document.getElementById(Math.abs(animalPosition-3)).style.backgroundColor = "#B7E2F3";
-            document.getElementById(Math.abs(animalPosition+3)).style.backgroundColor = "#B7E2F3";
-            document.getElementById(Math.abs(animalPosition-1)).style.backgroundColor = "#B7E2F3";
-            document.getElementById(Math.abs(animalPosition+1)).style.backgroundColor = "#B7E2F3";
-            document.getElementById(animalPosition).style.opacity = "0.3";
-        }
-        else {
-            
+    // show valid moves
+        // COW
+    if (dragged.id == "cow" || dragged.id == "cowBlue") {
+        if (animalPosition == 0 || animalPosition == 2) {
+            cowValid();
         }
     }
     
+        // SHEEP
+    else if (dragged.id == "sheep") {
+        if (animalPosition<9) {
+            redSheepValid();
+        }
+    }
+    else if (dragged.id == "sheepBlue") {
+        if (animalPosition>3) {
+            blueSheepValid();
+        }
+    }
 }
 
     // revival list
 
-function createRevivalList() {
+function drawRevivalList() {
     var table = document.getElementById("dead_animals");
     table.style.tableLayout = "fixed";
     
