@@ -160,17 +160,47 @@ function checkLegalMove(animal) {
                             
                             if (highlightOnOff == false) {
                                 document.getElementById(getPos).style.backgroundColor = "#6495ED";
+                                let coordB = document.createElement("div");
+                                coordB.className = "coordB " + getPos;
+                                document.getElementById(getPos).appendChild(coordB);
                                 
                                 // 동물 움직이기
                                 // Move animal warrior
+                                /*
                                 document.getElementById(getPos).addEventListener("click", function(e) {
                                     
                                     if (e.target == this) {
+                                        console.log(this.id);
+                                        //takeAni(this);
                                         
                                         this.appendChild(animal);
                                         
                                         for (let c=0; c < getValidPos.length; c++) {
                                             document.getElementById(getValidPos[c]).style.backgroundColor = "";
+                                            document.getElementsByClassName("coordB")[0].remove();
+                                        }
+                                        getValidPos = [];
+                                        (highlightOnOff) ? highlightOnOff = false : highlightOnOff = true;
+                                        turn = "red";
+                                    }
+                                })
+                                document.getElementsByClassName("coordB").addEventListener("click", function() {
+                                    console.log(this);
+                                })
+                                */
+                                console.log(getPos);
+                                document.getElementsByClassName(getPos)[0].addEventListener("click", function(e) {
+                                    console.log(this.parentNode);
+                                    if (e.target == this) {
+                                        
+                                        
+                                        
+                                        this.parentNode.appendChild(animal);
+                                        /*
+                                        */
+                                        for (let c=0; c < getValidPos.length; c++) {
+                                            document.getElementById(getValidPos[c]).style.backgroundColor = "";
+                                            document.getElementsByClassName("coordB")[0].remove();
                                         }
                                         getValidPos = [];
                                         (highlightOnOff) ? highlightOnOff = false : highlightOnOff = true;
@@ -206,10 +236,13 @@ function checkLegalMove(animal) {
                             //console.log(getPos);
                             if (highlightOnOff == false) {
                                 document.getElementById(getPos).style.backgroundColor = "hotpink";
-                                
+                                let coordR = document.createElement("div");
+                                coordR.className = "coordR " + getPos;
+                                document.getElementById(getPos).appendChild(coordR);
                                 // 동물 움직이기
                                 // Move animal warrior
                                 
+                                /*      KEEP      KEEP      KEEP      KEEP      KEEP      KEEP
                                 document.getElementById(getPos).addEventListener("click", function(e) {
                                     //console.log(this);
                                     if (e.target == this) {
@@ -218,20 +251,29 @@ function checkLegalMove(animal) {
                                         
                                         for (let c=0; c < getValidPos.length; c++) {
                                             document.getElementById(getValidPos[c]).style.backgroundColor = "";
+                                            document.getElementsByClassName("coordR")[0].remove();
                                         }
                                         getValidPos = [];
                                         (highlightOnOff) ? highlightOnOff = false : highlightOnOff = true;
                                         turn = "blue";
                                     }
                                 })
-                                /*
-                                document.getElementById(getPos).onclick = function(e) {
-
-                                    if (e.target !== document.getElementById(getPos)) {
-                                        console.log("hi");
+                                      KEEP      KEEP      KEEP      KEEP      KEEP      KEEP*/
+                                document.getElementsByClassName(getPos)[0].addEventListener("click", function(e) {
+                                    console.log(this.parentNode);
+                                    if (e.target == this) {
+                                        this.parentNode.appendChild(animal);
+                                        /*
+                                        */
+                                        for (let c=0; c < getValidPos.length; c++) {
+                                            document.getElementById(getValidPos[c]).style.backgroundColor = "";
+                                            document.getElementsByClassName("coordR")[0].remove();
+                                        }
+                                        getValidPos = [];
+                                        (highlightOnOff) ? highlightOnOff = false : highlightOnOff = true;
+                                        turn = "blue";
                                     }
-                                }
-                                */
+                                })
                             }
                             else {
                                 document.getElementById(getPos).style.backgroundColor = "";
@@ -241,6 +283,7 @@ function checkLegalMove(animal) {
                 }
             }
             
+            /*      KEEP      KEEP      KEEP      KEEP      KEEP      KEEP
             else if (turn !== "red" && this.id[0] == "r") {
                 alert("It's not your turn. Let BLUE animals play :)");
                 break;
@@ -250,12 +293,31 @@ function checkLegalMove(animal) {
                 alert("It's not your turn. Let RED animals play :)");
                 break;
             }
-        
+                  KEEP      KEEP      KEEP      KEEP      KEEP      KEEP*/
     }
         
         (highlightOnOff) ? highlightOnOff = false : highlightOnOff = true;
     })
 }
+
+    // 상대 동물전사 먹기
+    // Take opponent warrior
+function takeAni(ani) {
+    let checkTeam = ani.childNodes;
+    console.log(checkTeam);
+    if (checkTeam.length != 0) {
+        if (checkTeam[0].id[0] == animal.id[0]) {
+            alert("You cannot take your own team!");
+        }
+
+        else {
+            console.log(checkTeam[0]);
+        }
+    }
+    
+    
+}
+
 
 function reset() {
     // id = game_board 에 td/tr 이 존재할 경우
