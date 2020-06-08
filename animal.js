@@ -193,15 +193,19 @@ function checkLegalMove(animal) {
                                     console.log(this.parentNode);
                                     if (e.target == this) {
                                         
-                                        
-                                        
                                         this.parentNode.appendChild(animal);
-                                        /*
-                                        */
+                                        
                                         for (let c=0; c < getValidPos.length; c++) {
-                                            document.getElementById(getValidPos[c]).style.backgroundColor = "";
-                                            document.getElementsByClassName("coordB")[0].remove();
+                                            let docByGetValidPos = document.getElementById(getValidPos[c]);
+                                            docByGetValidPos.style.backgroundColor = "";
                                         }
+                                        
+                                        // remove valid move indicator - circle
+                                        
+                                        document.querySelectorAll(".coordB").forEach(function(a) {
+                                            a.remove();
+                                        });
+                                        
                                         getValidPos = [];
                                         (highlightOnOff) ? highlightOnOff = false : highlightOnOff = true;
                                         turn = "red";
@@ -210,6 +214,10 @@ function checkLegalMove(animal) {
                             }
                             else {
                                 document.getElementById(getPos).style.backgroundColor = "";
+                                // remove valid move indicator - circle
+                                document.querySelectorAll(".coordB").forEach(function(a) {
+                                    a.remove();
+                                });
                             }
                         }
                     }
@@ -263,12 +271,17 @@ function checkLegalMove(animal) {
                                     console.log(this.parentNode);
                                     if (e.target == this) {
                                         this.parentNode.appendChild(animal);
-                                        /*
-                                        */
+
                                         for (let c=0; c < getValidPos.length; c++) {
-                                            document.getElementById(getValidPos[c]).style.backgroundColor = "";
-                                            document.getElementsByClassName("coordR")[0].remove();
+                                            let docByGetValidPos = document.getElementById(getValidPos[c]);
+                                            docByGetValidPos.style.backgroundColor = "";
                                         }
+                                        
+                                        // remove valid move indicator - circle
+                                        document.querySelectorAll(".coordR").forEach(function(a) {
+                                            a.remove();
+                                        });
+                                        
                                         getValidPos = [];
                                         (highlightOnOff) ? highlightOnOff = false : highlightOnOff = true;
                                         turn = "blue";
@@ -277,6 +290,10 @@ function checkLegalMove(animal) {
                             }
                             else {
                                 document.getElementById(getPos).style.backgroundColor = "";
+                                // remove valid move indicator - circle
+                                document.querySelectorAll(".coordB").forEach(function(a) {
+                                    a.remove();
+                                });
                             }
                         }
                     }
@@ -284,6 +301,7 @@ function checkLegalMove(animal) {
             }
             
             /*      KEEP      KEEP      KEEP      KEEP      KEEP      KEEP
+                  KEEP      KEEP      KEEP      KEEP      KEEP      KEEP*/
             else if (turn !== "red" && this.id[0] == "r") {
                 alert("It's not your turn. Let BLUE animals play :)");
                 break;
@@ -293,7 +311,7 @@ function checkLegalMove(animal) {
                 alert("It's not your turn. Let RED animals play :)");
                 break;
             }
-                  KEEP      KEEP      KEEP      KEEP      KEEP      KEEP*/
+            
     }
         
         (highlightOnOff) ? highlightOnOff = false : highlightOnOff = true;
