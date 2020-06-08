@@ -164,6 +164,12 @@ function checkLegalMove(animal) {
                                 coordB.className = "coordB " + getPos;
                                 document.getElementById(getPos).appendChild(coordB);
                                 
+                                // 선택된 동물 외 모든 동물들의 opacity = 0.5
+                                // if animal warrior is selected, reduce opacity of unselected
+                                document.querySelectorAll("img").forEach(function(c) {
+                                    if (c.id !== animal.id) c.style.opacity = 0.5; 
+                                });
+                                
                                 // 동물 움직이기
                                 // Move animal warrior
                                 /*
@@ -193,12 +199,18 @@ function checkLegalMove(animal) {
                                     console.log(this.parentNode);
                                     if (e.target == this) {
                                         
-                                        this.parentNode.appendChild(animal);
+                                        document.querySelectorAll("img").forEach(function(c) {
+                                            c.style.opacity = 1; 
+                                        });
                                         
+                                        this.parentNode.appendChild(animal);
+                                        /*
                                         for (let c=0; c < getValidPos.length; c++) {
                                             let docByGetValidPos = document.getElementById(getValidPos[c]);
                                             docByGetValidPos.style.backgroundColor = "";
                                         }
+                                        */
+                                        document.querySelectorAll("td").forEach(c => c.style.backgroundColor = "");
                                         
                                         // remove valid move indicator - circle
                                         
@@ -212,11 +224,16 @@ function checkLegalMove(animal) {
                                     }
                                 })
                             }
+                            
                             else {
-                                document.getElementById(getPos).style.backgroundColor = "";
-                                // remove valid move indicator - circle
+                                // remove highlights/indicators
                                 document.querySelectorAll(".coordB").forEach(function(a) {
                                     a.remove();
+                                });
+                                document.querySelectorAll("td").forEach(c => c.style.backgroundColor = "");
+                                
+                                document.querySelectorAll("img").forEach(function(c) {
+                                    c.style.opacity = 1; 
                                 });
                             }
                         }
@@ -247,6 +264,12 @@ function checkLegalMove(animal) {
                                 let coordR = document.createElement("div");
                                 coordR.className = "coordR " + getPos;
                                 document.getElementById(getPos).appendChild(coordR);
+                                
+                                // 선택된 동물 외 모든 동물들의 opacity = 0.5
+                                // if animal warrior is selected, reduce opacity of unselected
+                                document.querySelectorAll("img").forEach(function(c) {
+                                    if (c.id !== animal.id) c.style.opacity = 0.5; 
+                                });
                                 // 동물 움직이기
                                 // Move animal warrior
                                 
@@ -270,12 +293,14 @@ function checkLegalMove(animal) {
                                 document.getElementsByClassName(getPos)[0].addEventListener("click", function(e) {
                                     console.log(this.parentNode);
                                     if (e.target == this) {
+                                        
+                                        document.querySelectorAll("img").forEach(function(c) {
+                                            c.style.opacity = 1; 
+                                        });
+                                        
                                         this.parentNode.appendChild(animal);
 
-                                        for (let c=0; c < getValidPos.length; c++) {
-                                            let docByGetValidPos = document.getElementById(getValidPos[c]);
-                                            docByGetValidPos.style.backgroundColor = "";
-                                        }
+                                        document.querySelectorAll("td").forEach(c => c.style.backgroundColor = "");
                                         
                                         // remove valid move indicator - circle
                                         document.querySelectorAll(".coordR").forEach(function(a) {
@@ -289,10 +314,14 @@ function checkLegalMove(animal) {
                                 })
                             }
                             else {
-                                document.getElementById(getPos).style.backgroundColor = "";
-                                // remove valid move indicator - circle
-                                document.querySelectorAll(".coordB").forEach(function(a) {
+                                // remove highlights/indicators
+                                document.querySelectorAll(".coordR").forEach(function(a) {
                                     a.remove();
+                                });
+                                document.querySelectorAll("td").forEach(c => c.style.backgroundColor = "");
+                                
+                                document.querySelectorAll("img").forEach(function(c) {
+                                    c.style.opacity = 1; 
                                 });
                             }
                         }
@@ -336,6 +365,14 @@ function takeAni(ani) {
     
 }
 
+    // 게임이 끝났는지 확인
+    // Check if the game is OVER
+function checkGameOver() {
+    
+    // 왕이 죽었는지 확인
+    // Check if the KING is taken
+    
+}
 
 function reset() {
     // id = game_board 에 td/tr 이 존재할 경우
@@ -365,7 +402,7 @@ function start() {
     // reset game board
     reset();
     
-    alert("Shall we begin?!");
+    alert("Let the game begin!!");
     
     // 게임 보드 그리기
     // Draw Game Board Table
