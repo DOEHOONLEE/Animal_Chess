@@ -8,8 +8,10 @@ let highlightOnOff = false;
 let num = 0;
 let cellId = 7;
 let turn = "blue";
+let killedAnimals = [];
 
-    // animals
+    // 동물전사 리스트
+    // animals warriors
 
 let animalWarriers = {
     "blue": [{
@@ -69,6 +71,7 @@ let animalWarriers = {
             /* --[FUNCTIONS]-- */
             /*******************/
 
+        //      [1]       //
 
     // 게임 보드 그리기 -> table 에 tr/td 넣기 + 가로/ 세로/ 아이디 부여
     // Draw Game Board -> put tr/td in table + set width/ height/ id
@@ -84,7 +87,7 @@ function setGameTable() {
         for (let c=0; c<3; c++) {
             let cell = document.createElement("td");
             
-            // height/ width/ height/ id 지정
+            // 가로/세로 길이 및 ID 지정
             // assign height/ width/ height/ id
             row.style.height = "112px";
             cell.style.width = "111px";
@@ -100,6 +103,7 @@ function setGameTable() {
     
 };
 
+    //      [2]       //
 
     // 동물전사들 보드에 올리기
     // Place animal warriors on the board
@@ -131,6 +135,7 @@ function setDefaultPos() {
     
 }
 
+    //      [3]  + [4]       //
 
     // 가능한 움직임 확인/보여주기
     // Show/check legal/possible moves
@@ -156,73 +161,25 @@ function checkLegalMove(animal) {
                         let getPos = (+parentID) + blueTeam.move[j];
                         
                         if (validCoord.includes(getPos)) {
-                            getValidPos.push(getPos);
                             
                             if (highlightOnOff == false) {
-                                document.getElementById(getPos).style.backgroundColor = "#6495ED";
-                                let coordB = document.createElement("div");
-                                coordB.className = "coordB " + getPos;
-                                document.getElementById(getPos).appendChild(coordB);
                                 
-                                // 선택된 동물 외 모든 동물들의 opacity = 0.5
-                                // if animal warrior is selected, reduce opacity of unselected
-                                document.querySelectorAll("img").forEach(function(c) {
-                                    if (c.id !== animal.id) c.style.opacity = 0.5; 
-                                });
-                                
-                                // 동물 움직이기
-                                // Move animal warrior
-                                /*
-                                document.getElementById(getPos).addEventListener("click", function(e) {
+                                // 상대편의 동물이 있거나 비어있는 곳으로만 움직일 수 있음 (같은 팀의 동물이 있는 경우 움직임을 제한)
+                                // Below IF STATEMENTS disable movement to the same team
+                                if (document.getElementById(getPos).childNodes.length > 0) {
                                     
-                                    if (e.target == this) {
-                                        console.log(this.id);
-                                        //takeAni(this);
-                                        
-                                        this.appendChild(animal);
-                                        
-                                        for (let c=0; c < getValidPos.length; c++) {
-                                            document.getElementById(getValidPos[c]).style.backgroundColor = "";
-                                            document.getElementsByClassName("coordB")[0].remove();
-                                        }
-                                        getValidPos = [];
-                                        (highlightOnOff) ? highlightOnOff = false : highlightOnOff = true;
-                                        turn = "red";
+                                    if (document.getElementById(getPos).childNodes[0].id[0] !== "b") {
+                                        validPointer(getPos, animal, "#6495ED", "coordB ");
+                                        moveAnimalPiece(getPos, animal, ".coordB");
                                     }
-                                })
-                                document.getElementsByClassName("coordB").addEventListener("click", function() {
-                                    console.log(this);
-                                })
-                                */
-                                console.log(getPos);
-                                document.getElementsByClassName(getPos)[0].addEventListener("click", function(e) {
-                                    console.log(this.parentNode);
-                                    if (e.target == this) {
-                                        
-                                        document.querySelectorAll("img").forEach(function(c) {
-                                            c.style.opacity = 1; 
-                                        });
-                                        
-                                        this.parentNode.appendChild(animal);
-                                        /*
-                                        for (let c=0; c < getValidPos.length; c++) {
-                                            let docByGetValidPos = document.getElementById(getValidPos[c]);
-                                            docByGetValidPos.style.backgroundColor = "";
-                                        }
-                                        */
-                                        document.querySelectorAll("td").forEach(c => c.style.backgroundColor = "");
-                                        
-                                        // remove valid move indicator - circle
-                                        
-                                        document.querySelectorAll(".coordB").forEach(function(a) {
-                                            a.remove();
-                                        });
-                                        
-                                        getValidPos = [];
-                                        (highlightOnOff) ? highlightOnOff = false : highlightOnOff = true;
-                                        turn = "red";
-                                    }
-                                })
+                                }
+
+                                else if (document.getElementById(getPos).childNodes.length === 0) {
+                                    
+                                    validPointer(getPos, animal, "#6495ED", "coordB ");
+                                    moveAnimalPiece(getPos, animal, ".coordB");
+                                }
+
                             }
                             
                             else {
@@ -257,62 +214,27 @@ function checkLegalMove(animal) {
                         let getPos = (+parentID) + redTeam.move[j];
                         
                         if (validCoord.includes(getPos)) {
-                            getValidPos.push(getPos);
-                            //console.log(getPos);
-                            if (highlightOnOff == false) {
-                                document.getElementById(getPos).style.backgroundColor = "hotpink";
-                                let coordR = document.createElement("div");
-                                coordR.className = "coordR " + getPos;
-                                document.getElementById(getPos).appendChild(coordR);
-                                
-                                // 선택된 동물 외 모든 동물들의 opacity = 0.5
-                                // if animal warrior is selected, reduce opacity of unselected
-                                document.querySelectorAll("img").forEach(function(c) {
-                                    if (c.id !== animal.id) c.style.opacity = 0.5; 
-                                });
-                                // 동물 움직이기
-                                // Move animal warrior
-                                
-                                /*      KEEP      KEEP      KEEP      KEEP      KEEP      KEEP
-                                document.getElementById(getPos).addEventListener("click", function(e) {
-                                    //console.log(this);
-                                    if (e.target == this) {
-                                        
-                                        this.appendChild(animal);
-                                        
-                                        for (let c=0; c < getValidPos.length; c++) {
-                                            document.getElementById(getValidPos[c]).style.backgroundColor = "";
-                                            document.getElementsByClassName("coordR")[0].remove();
-                                        }
-                                        getValidPos = [];
-                                        (highlightOnOff) ? highlightOnOff = false : highlightOnOff = true;
-                                        turn = "blue";
-                                    }
-                                })
-                                      KEEP      KEEP      KEEP      KEEP      KEEP      KEEP*/
-                                document.getElementsByClassName(getPos)[0].addEventListener("click", function(e) {
-                                    console.log(this.parentNode);
-                                    if (e.target == this) {
-                                        
-                                        document.querySelectorAll("img").forEach(function(c) {
-                                            c.style.opacity = 1; 
-                                        });
-                                        
-                                        this.parentNode.appendChild(animal);
 
-                                        document.querySelectorAll("td").forEach(c => c.style.backgroundColor = "");
-                                        
-                                        // remove valid move indicator - circle
-                                        document.querySelectorAll(".coordR").forEach(function(a) {
-                                            a.remove();
-                                        });
-                                        
-                                        getValidPos = [];
-                                        (highlightOnOff) ? highlightOnOff = false : highlightOnOff = true;
-                                        turn = "blue";
+                            if (highlightOnOff == false) {
+
+                                // 상대편의 동물이 있거나 비어있는 곳으로만 움직일 수 있음 (같은 팀의 동물이 있는 경우 움직임을 제한)
+                                // Below IF STATEMENTS disable movement to the same team
+                                if (document.getElementById(getPos).childNodes.length > 0) {
+                                    
+                                    if (document.getElementById(getPos).childNodes[0].id[0] !== "r") {
+                                        validPointer(getPos, animal, "hotpink", "coordR ");
+                                        moveAnimalPiece(getPos, animal, ".coordR");
                                     }
-                                })
+                                }
+
+                                else if (document.getElementById(getPos).childNodes.length === 0) {
+                                    
+                                    validPointer(getPos, animal, "hotpink", "coordR ");
+                                    moveAnimalPiece(getPos, animal, ".coordR");
+                                }
+
                             }
+
                             else {
                                 // remove highlights/indicators
                                 document.querySelectorAll(".coordR").forEach(function(a) {
@@ -328,9 +250,7 @@ function checkLegalMove(animal) {
                     }
                 }
             }
-            
-            /*      KEEP      KEEP      KEEP      KEEP      KEEP      KEEP
-                  KEEP      KEEP      KEEP      KEEP      KEEP      KEEP*/
+
             else if (turn !== "red" && this.id[0] == "r") {
                 alert("It's not your turn. Let BLUE animals play :)");
                 break;
@@ -341,39 +261,104 @@ function checkLegalMove(animal) {
                 break;
             }
             
-    }
+        }
         
         (highlightOnOff) ? highlightOnOff = false : highlightOnOff = true;
     })
 }
 
-    // 상대 동물전사 먹기
-    // Take opponent warrior
-function takeAni(ani) {
-    let checkTeam = ani.childNodes;
-    console.log(checkTeam);
-    if (checkTeam.length != 0) {
-        if (checkTeam[0].id[0] == animal.id[0]) {
-            alert("You cannot take your own team!");
-        }
+    //      [3]       //
 
-        else {
-            console.log(checkTeam[0]);
-        }
-    }
-    
-    
+    // 가능한 움직임 표시하기
+    // Show valid/legal moves
+function validPointer(getPos, animal, teamColor, teamColorTxt) {
+    document.getElementById(getPos).style.backgroundColor = teamColor;
+    let coord = document.createElement("div");
+    coord.className = teamColorTxt + getPos;
+    document.getElementById(getPos).appendChild(coord);
+
+    // 선택된 동물 외 모든 동물들의 opacity = 0.5
+    // if animal warrior is selected, reduce opacity of unselected
+    document.querySelectorAll("img").forEach(function(c) {
+        if (c.id !== animal.id) c.style.opacity = 0.5; 
+    });
 }
+
+    //      [4]       //
+
+    // 동물 움직이기
+    // Move animal warrior
+function moveAnimalPiece(getPos, animal, teamColor) {
+    document.getElementsByClassName(getPos)[0].addEventListener("click", function(e) {
+        if (e.target == this) {
+            
+            document.querySelectorAll("img").forEach(function(c) {
+                c.style.opacity = 1; 
+            });
+            
+            if (document.getElementById(getPos).childNodes.length > 1) {
+                let killed = document.getElementById(getPos).childNodes[0];
+                killedAnimals.push(document.getElementById(getPos).childNodes[0]);
+                document.getElementById(getPos).childNodes[0].remove();
+                let killedCell = document.createElement("td");
+                console.log(killed);
+                document.getElementsByClassName(killed.id)[0].appendChild(killed);
+            }
+
+            // 동물 움직이기
+            // Move animal warrior
+            this.parentNode.appendChild(animal);
+            
+            // 게임이 끝났는지 확인
+            // Check if the game is OVER
+            checkGameOver();
+            
+            // remove highlighter
+            document.querySelectorAll("td").forEach(c => c.style.backgroundColor = "");
+            
+            // remove valid move indicator - circle
+            
+            document.querySelectorAll(teamColor).forEach(function(a) {
+                a.remove();
+            });
+            
+            getValidPos = [];
+            
+            (highlightOnOff) ? highlightOnOff = false : highlightOnOff = true;
+            
+            (turn == "red") ? turn = "blue" : turn = "red";
+        }
+    })
+}
+
+    //      [5]       //
 
     // 게임이 끝났는지 확인
     // Check if the game is OVER
 function checkGameOver() {
+    let redKing = document.getElementsByClassName("red_lion")[0].childNodes.length;
+    let blueKing = document.getElementsByClassName("blue_tiger")[0].childNodes.length;
     
-    // 왕이 죽었는지 확인
-    // Check if the KING is taken
-    
+    if (redKing == 1) {
+        alert("BLUE WON!!");
+        //      [6]       //
+        // 게임 다시 시작
+        // Restart the game
+        start();
+    }
+    if (blueKing == 1) {
+        alert("RED WON!!");
+        //      [6]       //
+        // 게임 다시 시작
+        // Restart the game
+        start();
+    }
 }
 
+    //      [6]       //
+
+    // 게임 리셋
+    // Reset Game
 function reset() {
     // id = game_board 에 td/tr 이 존재할 경우
     // if there are td/tr in id = game_board, remove them
@@ -389,25 +374,27 @@ function reset() {
 }
 
 
-            /*******************/
+            /********************/
             /* --[Game Start]-- */
-            /*******************/
+            /********************/
 
 
     // 게임 스타트
     // Game Start
 function start() {
-    
+    //      [6]       //
     // 게임 초기화
     // reset game board
     reset();
     
     alert("Let the game begin!!");
     
+    //      [1]       //
     // 게임 보드 그리기
     // Draw Game Board Table
     setGameTable();
     
+    //      [2]       //
     // 동물전사들 보드에 올리기
     // Place animal warriors on the board
     setDefaultPos();

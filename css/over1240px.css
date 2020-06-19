@@ -56,13 +56,13 @@ li {
     height: 468px;
 }
 
-#game_board tr {
+tr {
     width: 342px;
     height: 112px;
     padding: 0;
 }
 
-#game_board td {
+td {
     border: 1px solid black;
     width: 111px;
     height: 111px;
