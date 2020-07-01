@@ -16,25 +16,25 @@ let killedAnimals = [];
 let animalWarriers = {
     "blue": [{
             "name": "blue_rabbit",
-            "url": "./images/rabbit_blue.png",
+            "url": "./images/rabbit.png",
             "defPos": 24,
             "move": [1,-1,5,-5]
         },
         {
             "name": "blue_tiger",
-            "url": "./images/tiger_blue.png",
+            "url": "./images/tiger.png",
             "defPos": 23,
             "move": [1,5,4,6,-1,-5,-4,-6]
         },
         {
             "name": "blue_cow",
-            "url": "./images/cow_blue.png",
+            "url": "./images/cow.png",
             "defPos": 22,
             "move": [4,6,-4,-6]
         },
         {
             "name": "blue_sheep",
-            "url": "./images/sheep_blue.png",
+            "url": "./images/sheep.png",
             "defPos": 18,
             "move": [-5]
         }
