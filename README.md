@@ -10,6 +10,13 @@ Small board game built with following techs.
 
 ## Rules
 
+Game play image
+
+![Gameplay](https://github.com/DOEHOONLEE/Animal_Chess/tree/master/images/main.png)
+
+Each animal has its own unique/valid move. Tap on the animal to find out!
+
+The game is over once the KING [LION / PANDA] is taken.
 
 ## Updates / progress
 
