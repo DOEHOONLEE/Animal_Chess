@@ -1,15 +1,17 @@
+<?php
+    include "./db.php";
+?>
 <!DOCTYPE html>
 <html>
     <head>
         <title></title>
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <link href="https://fonts.googleapis.com/css?family=Baloo+Tamma" rel="stylesheet">
+        <link type="text/css" href="https://fonts.googleapis.com/css?family=Baloo+Tamma" rel="stylesheet">
         <link rel="stylesheet" href="./font-awesome-4.6.3/css/font-awesome.min.css">
         <link rel="stylesheet" type="text/css" href="./css/over1240px.css" />
-        <link rel="stylesheet" type="text/css" href="below650px.css" />
+        <link rel="stylesheet" type="text/css" href="./css/below650px.css" />
         <script type="text/javascript" src="./jquery/jquery-3.1.0.min.js"></script>
         <scipt type="text/javascript" src="./jquery/jquery-ui-1.12.0/" ></scipt>
-        <script type="text/javascript" src="./script.js"></script>
     </head>
     <body>
         <div class="header">
@@ -18,19 +20,19 @@
         <div id="side_menu_bar" class="side_menu">
             <ul>
                 <li><a href="javascript:void(0)" onclick="close_side_menu()"><i class="fa fa-times-circle" aria-hidden="true"></i></a></li>
-                <li><a href="./index.html">Login</a></li>
+                <li><a href="./index.php">Login</a></li>
                 <li><a href="./play.html">Play</a></li>
-                <li><a href="./instruction.html">Instruction</a></li>
+                <li><a href="./instruction.html">How to</a></li>
                 <li><a href="./about.html">About</a></li>
                 <p> &copy; 2016 - website built by Doe Hoon LEE</p>
             </ul>
         </div>
-        <span style="font-size:25px;cursor:pointer" onclick="open_side_menu()"><i class="fa fa-bars" aria-hidden="true"></i></span>
+        <span id="span" style="font-size:25px;cursor:pointer" onclick="open_side_menu()"><i class="fa fa-bars" aria-hidden="true"></i></span>
         <div class="navbar">
             <ul>
-                <li><a href="./index.html">Login</a></li>
+                <li><a href="./index.php">Login</a></li>
                 <li><a href="./play.html">Play</a></li>
-                <li><a href="./instruction.html">Instruction</a></li>
+                <li><a href="./instruction.html">How to</a></li>
                 <li><a href="./about.html">About</a></li>
             </ul>
         </div>
@@ -38,20 +40,23 @@
             <p></p>
             <p></p>
             <p></p>
+            
             <div class="user_input">
-            STATUS &nbsp; &nbsp; &nbsp;<input type="text" name="status_message" size="20" maxlength="25" value="about yourself.." />
-            <p></p>
-            USERNAME <input type="text" name="username" size="20" maxlength="25" />
-            <p></p>
-            PASSWORD <input type="password" name="password" size="20" maxlength="25" />
+                <form method="post" action="./members/login_action.php">
+                    <p>STATUS</p><input type="text" name="statusMessage" size="20" maxlength="25" placeholder="Your status message" />
+                    <p>USER ID</p><input type="text" name="userId" size="20" maxlength="25" placeholder="user ID" />
+                    <p>PASSWORD</p><input type="password" name="userPassword" size="20" maxlength="25" placeholder="password must contain lower & uppercase + special character" />
+                    <div class="sign" id="sign_up">
+                        <button class="sign start btn" id="sign_in" type="submit" value="SIGN IN">sign in</button>
+                        <button class="sign-up btn"><a href="./signup.php">SIGN UP</a></button>
+                    </div>
+                </form>
             </div>
-            <p></p>
-            <div class="sign_in">
-                &nbsp;&nbsp;&nbsp;&nbsp;<button class="start btn"><a href="./play.html">SIGN ME IN</a></button>
-            </div>
+
         </div>
         <div class="copyright">
             <h3> &copy; 2016 - website built by Doe Hoon LEE </h3>
         </div>
+        <script type="text/javascript" src="slideMenu.js"></script>
     </body>
 </html>

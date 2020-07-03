@@ -16,25 +16,25 @@ let killedAnimals = [];
 let animalWarriers = {
     "blue": [{
             "name": "blue_rabbit",
-            "url": "./images/rabbit_blue.png",
+            "url": "./images/rabbit.png",
             "defPos": 24,
             "move": [1,-1,5,-5]
         },
         {
             "name": "blue_tiger",
-            "url": "./images/tiger_blue.png",
+            "url": "./images/tiger.png",
             "defPos": 23,
             "move": [1,5,4,6,-1,-5,-4,-6]
         },
         {
             "name": "blue_cow",
-            "url": "./images/cow_blue.png",
+            "url": "./images/cow.png",
             "defPos": 22,
             "move": [4,6,-4,-6]
         },
         {
             "name": "blue_sheep",
-            "url": "./images/sheep_blue.png",
+            "url": "./images/sheep.png",
             "defPos": 18,
             "move": [-5]
         }
@@ -142,6 +142,8 @@ function setDefaultPos() {
 function checkLegalMove(animal) {
     animal.addEventListener("click", function() {
         
+        validPointerCaptured(animal);
+
         for (let i=0; i<4; i++) {
             
             // 블루팀 동물 선택 시
@@ -275,13 +277,47 @@ function validPointer(getPos, animal, teamColor, teamColorTxt) {
     document.getElementById(getPos).style.backgroundColor = teamColor;
     let coord = document.createElement("div");
     coord.className = teamColorTxt + getPos;
+    
     document.getElementById(getPos).appendChild(coord);
+
+    console.log(
+
+        coord + " " +
+        typeof coord.className + " " +
+        document.getElementById(getPos).appendChild(coord)
+    );
 
     // 선택된 동물 외 모든 동물들의 opacity = 0.5
     // if animal warrior is selected, reduce opacity of unselected
     document.querySelectorAll("img").forEach(function(c) {
         if (c.id !== animal.id) c.style.opacity = 0.5; 
     });
+}
+
+    //      [00]       //
+
+    // 포로 동물들의 가능한 움직임 표시
+    // Show valid/legal moves for captured animals
+function validPointerCaptured(captured) {
+    // console.log(e.target)
+    if (captured.parentNode.parentNode.id === "killed_red") {
+        validPointer("7", captured, "hotpink", "coordR ");
+        validPointer("8", captured, "hotpink", "coordR ");
+        validPointer("9", captured, "hotpink", "coordR ");
+
+        moveAnimalPiece("7", captured, ".coordR");
+        moveAnimalPiece("8", captured, ".coordR");
+        moveAnimalPiece("9", captured, ".coordR");
+    }
+    else if (captured.parentNode.parentNode.id === "killed_blue") {
+        validPointer("22", captured, "#6495ED", "coordB ");
+        validPointer("23", captured, "#6495ED", "coordB ");
+        validPointer("24", captured, "#6495ED", "coordB ");
+
+        moveAnimalPiece("22", captured, ".coordB");
+        moveAnimalPiece("23", captured, ".coordB");
+        moveAnimalPiece("24", captured, ".coordB");
+    }
 }
 
     //      [4]       //
@@ -367,6 +403,11 @@ function reset() {
             document.getElementById("game_board").childNodes[0].remove();
         }
     }
+
+    // 포로 동물들 리셋
+    // remove animal containing cell
+    document.querySelectorAll("img").forEach(c => c.remove());
+
     // variable 초기화!
     // reset variables!
     num = 0;
