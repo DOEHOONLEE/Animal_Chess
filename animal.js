@@ -275,17 +275,17 @@ function checkLegalMove(animal) {
     // Show valid/legal moves
 function validPointer(getPos, animal, teamColor, teamColorTxt) {
     document.getElementById(getPos).style.backgroundColor = teamColor;
+    console.log(document.getElementById(getPos).childNodes.length)
     let coord = document.createElement("div");
     coord.className = teamColorTxt + getPos;
     
     document.getElementById(getPos).appendChild(coord);
 
-    console.log(
-
-        coord + " " +
-        typeof coord.className + " " +
-        document.getElementById(getPos).appendChild(coord)
-    );
+    // console.log(
+    //     coord + " " +
+    //     typeof coord.className + " " +
+    //     document.getElementById(getPos).appendChild(coord)
+    // );
 
     // 선택된 동물 외 모든 동물들의 opacity = 0.5
     // if animal warrior is selected, reduce opacity of unselected
@@ -299,25 +299,25 @@ function validPointer(getPos, animal, teamColor, teamColorTxt) {
     // 포로 동물들의 가능한 움직임 표시
     // Show valid/legal moves for captured animals
 function validPointerCaptured(captured) {
-    // console.log(e.target)
+    
     if (captured.parentNode.parentNode.id === "killed_red") {
-        validPointer("7", captured, "hotpink", "coordR ");
-        validPointer("8", captured, "hotpink", "coordR ");
-        validPointer("9", captured, "hotpink", "coordR ");
-
-        moveAnimalPiece("7", captured, ".coordR");
-        moveAnimalPiece("8", captured, ".coordR");
-        moveAnimalPiece("9", captured, ".coordR");
+        validCoord.forEach(function(c) {
+            if (!document.getElementById(c).childNodes.length) {
+                validPointer(c, captured, "hotpink", "coordR ");
+                moveAnimalPiece(c, captured, ".coordR");
+            }
+        })
     }
+
     else if (captured.parentNode.parentNode.id === "killed_blue") {
-        validPointer("22", captured, "#6495ED", "coordB ");
-        validPointer("23", captured, "#6495ED", "coordB ");
-        validPointer("24", captured, "#6495ED", "coordB ");
-
-        moveAnimalPiece("22", captured, ".coordB");
-        moveAnimalPiece("23", captured, ".coordB");
-        moveAnimalPiece("24", captured, ".coordB");
+        validCoord.forEach(function(c) {
+            if (!document.getElementById(c).childNodes.length) {
+                validPointer(c, captured, "hotpink", "coordR ");
+                moveAnimalPiece(c, captured, ".coordR");
+            }
+        })
     }
+
 }
 
     //      [4]       //
@@ -336,8 +336,8 @@ function moveAnimalPiece(getPos, animal, teamColor) {
                 let killed = document.getElementById(getPos).childNodes[0];
                 killedAnimals.push(document.getElementById(getPos).childNodes[0]);
                 document.getElementById(getPos).childNodes[0].remove();
+                
                 let killedCell = document.createElement("td");
-                console.log(killed);
                 document.getElementsByClassName(killed.id)[0].appendChild(killed);
             }
 
