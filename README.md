@@ -21,12 +21,14 @@ The game is over once the KING [LION / PANDA] is taken.
 
 ## Updates / progress
 
- + Game play
-    - ~~Captured animals should be removed once the game is over~~
-    - Restrict valid moves for captured animal revival
+ + Bugs
+    - [x] Captured animals should be removed once the game is over
+    - [x] Restrict valid moves for captured animal revival
 
- + Service
-    - make signup/login possible
-    - multi-user chat
-    - multiplayer
-    - keep scores
+ + Improvements
+
+ + Upcoming Features
+    - [x] Make signup/login possible
+    - [ ] Multi-user chat
+    - [ ] Multiplayer
+    - [ ] Keep scores
