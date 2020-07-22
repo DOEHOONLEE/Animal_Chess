@@ -300,7 +300,7 @@ function validPointer(getPos, animal, teamColor, teamColorTxt) {
     // Show valid/legal moves for captured animals
 function validPointerCaptured(captured) {
     
-    if (captured.parentNode.parentNode.id === "killed_red") {
+    if (captured.parentNode.parentNode.id === "killed_red" && turn === "red") {
         validCoord.forEach(function(c) {
             if (!document.getElementById(c).childNodes.length) {
                 validPointer(c, captured, "hotpink", "coordR ");
@@ -309,7 +309,7 @@ function validPointerCaptured(captured) {
         })
     }
 
-    else if (captured.parentNode.parentNode.id === "killed_blue") {
+    else if (captured.parentNode.parentNode.id === "killed_blue" && turn === "blue") {
         validCoord.forEach(function(c) {
             if (!document.getElementById(c).childNodes.length) {
                 validPointer(c, captured, "hotpink", "coordR ");
@@ -336,11 +336,22 @@ function moveAnimalPiece(getPos, animal, teamColor) {
                 let killed = document.getElementById(getPos).childNodes[0];
                 killedAnimals.push(document.getElementById(getPos).childNodes[0]);
                 document.getElementById(getPos).childNodes[0].remove();
-                
+
+                if (killed.id[0] === "r")  {
+                    killed.style.border = "3px solid blue";
+                    killed.id = "blue" + killed.id.slice(3);
+                }
+                else {
+                    killed.style.border = "3px solid red";
+                    killed.id =  "red" + killed.id.slice(4);
+                }
+
+                console.log(killed);
+
                 let killedCell = document.createElement("td");
                 document.getElementsByClassName(killed.id)[0].appendChild(killed);
             }
-
+            
             // 동물 움직이기
             // Move animal warrior
             this.parentNode.appendChild(animal);
