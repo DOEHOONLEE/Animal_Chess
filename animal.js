@@ -8,6 +8,7 @@ let highlightOnOff = false;
 let num = 0;
 let cellId = 7;
 let turn = "blue";
+let wiggle = false;
 let killedAnimals = [];
 
     // 동물전사 리스트
@@ -144,6 +145,15 @@ function checkLegalMove(animal) {
         
         validPointerCaptured(animal);
 
+        if (wiggle === false) {
+            animal.classList.add("animalWiggle");
+            wiggle = true;
+        }
+        else {
+            animal.classList.remove("animalWiggle")
+            wiggle = false;
+        }
+
         for (let i=0; i<4; i++) {
             
             // 블루팀 동물 선택 시
@@ -275,7 +285,7 @@ function checkLegalMove(animal) {
     // Show valid/legal moves
 function validPointer(getPos, animal, teamColor, teamColorTxt) {
     document.getElementById(getPos).style.backgroundColor = teamColor;
-    console.log(document.getElementById(getPos).childNodes.length)
+    
     let coord = document.createElement("div");
     coord.className = teamColorTxt + getPos;
     
