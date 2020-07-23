@@ -1,0 +1,18 @@
+.animalWiggle {
+  -webkit-animation-name: wiggle;
+  -ms-animation-name: wiggle;
+  -ms-animation-duration: 1000ms;
+  -webkit-animation-duration: 1000ms;
+  -webkit-animation-iteration-count: infinite;
+  -ms-animation-iteration-count: infinite;
+  -webkit-animation-timing-function: ease-in-out;
+  -ms-animation-timing-function: ease-in-out;
+}
+
+@keyframes wiggle {
+  0% {transform: rotate(6deg);}
+  25% {transform: rotate(-6deg);}
+  50% {transform: rotate(6deg);}
+  75% {transform: rotate(-6deg);}
+  100% {transform: rotate(6deg);}
+}
