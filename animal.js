@@ -144,13 +144,13 @@ function checkLegalMove(animal) {
     animal.addEventListener("click", function() {
         
         validPointerCaptured(animal);
-
+        
         if (wiggle === false) {
-            animal.classList.add("animalWiggle");
+            this.classList.add('animalWiggle');
             wiggle = true;
         }
         else {
-            animal.classList.remove("animalWiggle")
+            this.classList.remove('animalWiggle')
             wiggle = false;
         }
 
@@ -160,7 +160,7 @@ function checkLegalMove(animal) {
             // if selected animal is team blue
             // this.id[0] == "b"
             if (turn == "blue" && this.id[0] == "b") {
-                
+
                 let blueTeam = animalWarriers.blue[i];
                 if (this.id == blueTeam.name) {
                     
@@ -329,6 +329,7 @@ function validPointerCaptured(captured) {
     }
 
 }
+
 
     //      [4]       //
 
