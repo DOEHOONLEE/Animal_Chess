@@ -145,14 +145,17 @@ function checkLegalMove(animal) {
         
         validPointerCaptured(animal);
         
-        if (wiggle === false) {
-            this.classList.add('animalWiggle');
-            wiggle = true;
-        }
-        else {
-            this.classList.remove('animalWiggle')
-            wiggle = false;
-        }
+        // 선택된 동물 위글
+        // wiggle selected animal
+
+        // if (wiggle === false) {
+        //     this.classList.add('animalWiggle');
+        //     wiggle = true;
+        // }
+        // else {
+        //     this.classList.remove('animalWiggle')
+        //     wiggle = false;
+        // }
 
         for (let i=0; i<4; i++) {
             
